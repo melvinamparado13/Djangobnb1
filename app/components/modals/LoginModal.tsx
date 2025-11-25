@@ -11,7 +11,7 @@ import { handleLogin } from "@/app/lib/action";
 
 
 
-const UserNav = () => {
+const LoginModal = () => {
     const router = useRouter()
     const loginModal = useLoginModal()
     const [email, setEmail] = useState('');
@@ -81,4 +81,4 @@ const UserNav = () => {
 }
 
 
-export default UserNav;
+export default LoginModal;

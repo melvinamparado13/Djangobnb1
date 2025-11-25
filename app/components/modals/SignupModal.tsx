@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useSignupModal from "@/app/hooks/useSignupModal";
-import CustomBtn from "../forms/CustomButton";
+import CustomButton from "../forms/CustomButton";
 import { handleLogin } from "@/app/lib/action";
 import apiService from "@/app/services/apiService";
 import { stringify } from "querystring";
@@ -120,7 +120,7 @@ const SignUpModal = () => {
 
 
 
-                <CustomBtn
+                <CustomButton
                     label="Submit"
                     onClick={submitSignup}
                 />
