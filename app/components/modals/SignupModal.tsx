@@ -7,7 +7,8 @@ import useSignupModal from "@/app/hooks/useSignupModal";
 import CustomButton from "../forms/CustomButton";
 import { handleLogin } from "@/app/lib/action";
 import apiService from "@/app/services/apiService";
-import { stringify } from "querystring";
+
+
 
 
 
@@ -16,9 +17,6 @@ const SignUpModal = () => {
 
 
 
-
-    //
-    // Variables
 
 
 
@@ -36,9 +34,6 @@ const SignUpModal = () => {
 
 
 
-
-    //
-    // Submit functionality
 
 
 
@@ -58,9 +53,11 @@ const SignUpModal = () => {
 
 
 
+
         if (response.access) {
             handleLogin(response.user.pk, response.access, response.refresh);
             signupModal.close();
+
 
 
 
@@ -77,6 +74,9 @@ const SignUpModal = () => {
             setErrors(tmpErrors);
         }
     }
+
+
+
 
 
 
@@ -106,6 +106,7 @@ const SignUpModal = () => {
 
 
 
+
                 {errors.map((error, index) => {
                     return (
                         <div
@@ -126,6 +127,7 @@ const SignUpModal = () => {
                 />
             </form>
         </>
+
     )
 
 

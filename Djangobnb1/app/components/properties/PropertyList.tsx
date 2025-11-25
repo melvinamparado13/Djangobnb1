@@ -1,12 +1,9 @@
 'use client';
 
 
-
 import { useEffect, useState } from 'react';
 import PropertyListItem from "./PropertyListItem";
 import apiService from '@/app/services/apiService';
-
-
 
 
 export type PropertyType = {
@@ -17,10 +14,8 @@ export type PropertyType = {
 }
 
 
-
 const PropertyList = () => {
     const [properties, setProperties] = useState<PropertyType[]>([]);
-
 
 
     const getProperties = async () => {
@@ -31,11 +26,9 @@ const PropertyList = () => {
     };
 
 
-
     useEffect(() => {
         getProperties();
     }, []);
-
 
 
     return (
@@ -52,7 +45,6 @@ const PropertyList = () => {
         </>
     )
 }
-
 
 
 export default PropertyList;

@@ -1,31 +1,17 @@
 'use client';
 
 
-
 import { useState } from "react";
 import MenuLink from "./MenuLink";
-import LogoutButton from "../LogoutButton";
-
-
-
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
 
 
 
-interface UserNavProps {
-    userId?: string | null;
-}
 
 
 
-
-
-
-
-const UserNav: React.FC<UserNavProps> = ({
-    userId
-}) => {
+const UserNav = () => {
     const loginModal = useLoginModal();
     const signUpModal = useSignupModal();
     const [isOpen, setIsOpen] = useState(false)
@@ -47,38 +33,31 @@ const UserNav: React.FC<UserNavProps> = ({
 
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border border-gray-300 rounded-xl shadow-md flex flex-col cursor-pointer overflow-hidden">
-                    {userId ? (
-                        <LogoutButton />
 
 
-                    ) : (
-                        <>
-                            <MenuLink
-                                label='Log in'
-                                onClick={() => {
-                                    loginModal.open();
-                                    setIsOpen(false);
-                                }}
-                            />
 
 
-                            <MenuLink
-                                label="Sign up"
-                                onClick={() => {
-                                    signUpModal.open();
-                                    setIsOpen(false);
-                                }}
-                            />
-                        </>
-                    )}
+                    <MenuLink
+                        label='Log in'
+                        onClick={() => {
+                            loginModal.open();
+                            setIsOpen(false);
+                        }}
+                    />
 
 
+                    <MenuLink
+                        label="Sign up"
+                        onClick={() => {
+                            signUpModal.open();
+                            setIsOpen(false);
+                        }}
+                    />
                 </div>
             )}
         </div>
     )
 }
-
 
 
 export default UserNav;
