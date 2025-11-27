@@ -48,7 +48,12 @@ const SignUpModal = () => {
 
 
 
-        const response = await apiService.post('/api/auth/register/', JSON.stringify(formData));
+        const formDataObj = new FormData();
+        formDataObj.append('email', email);
+        formDataObj.append('password1', password1);
+        formDataObj.append('password2', password2);
+
+        const response = await apiService.post('/api/auth/register/', formDataObj);
 
 
 

@@ -26,12 +26,14 @@ const apiService = {
     post: async function (url: string, data: any): Promise<any> {
         console.log('post', url, data);
         return new Promise((resolve, reject) => {
+            const headers: any = {};
+            if (typeof data === 'string') {
+                headers['Content-Type'] = 'application/json';
+            }
             fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
                 method: 'POST',
                 body: data,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: headers
             })
                 .then(response => response.json())
                 .then((json) => {
