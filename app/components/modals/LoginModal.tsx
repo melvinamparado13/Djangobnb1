@@ -1,22 +1,29 @@
 'use client';
 
+
 import Modal from "./Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import CustomButton from "../forms/CustomButton";
 
+
 import apiService from "@/app/services/apiService";
 import { handleLogin } from "@/app/lib/action";
 
 
 
-const LoginModal = () => {
+
+
+
+const UserNav = () => {
     const router = useRouter()
     const loginModal = useLoginModal()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
+
+
 
 
     const submitLogin = async () => {
@@ -25,22 +32,23 @@ const LoginModal = () => {
             password: password
         }
 
-        const formDataObj = new FormData();
-        formDataObj.append('email', email);
-        formDataObj.append('password', password);
 
-        const response = await apiService.post('/api/auth/login/', formDataObj)
+        const response = await apiService.postWithoutToken('/api/auth/login/', JSON.stringify(formData))
+
 
         if (response.access) {
             handleLogin(response.user.pk, response.access, response.refresh);
 
+
             loginModal.close();
+
 
             router.push('/')
         } else {
             setErrors(response.non_field_errors);
         }
     }
+
 
     const content = (
         <>
@@ -50,7 +58,9 @@ const LoginModal = () => {
             >
                 <input onChange={(e) => setEmail(e.target.value)} placeholder="Your e-mail address" type="email" className="w-full h-[54px] px-4 border border-gray-300 rounded-xl" />
 
+
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="Your password" type="password" className="w-full h-[54px] px-4 border border-gray-300 rounded-xl" />
+
 
                 {errors.map((error, index) => {
                     return (
@@ -64,6 +74,8 @@ const LoginModal = () => {
                 })}
 
 
+
+
                 <CustomButton
                     label="Submit"
                     onClick={submitLogin}
@@ -71,7 +83,9 @@ const LoginModal = () => {
             </form>
         </>
 
+
     )
+
 
     return (
         <Modal
@@ -81,8 +95,11 @@ const LoginModal = () => {
             content={content}
         />
 
+
     )
 }
 
 
-export default LoginModal;
+
+
+export default UserNav;

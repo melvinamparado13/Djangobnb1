@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 
 
-interface LoginModalStore {
+interface AddPropertyModalStore {
     isOpen: boolean;
     open: () => void;
     close: () => void;
@@ -12,7 +12,7 @@ interface LoginModalStore {
 
 
 
-const useLoginModal = create<LoginModalStore>((set) => ({
+const useAddPropertyModal = create<AddPropertyModalStore>((set) => ({
     isOpen: false,
     open: () => set({ isOpen: true }),
     close: () => set({ isOpen: false })
@@ -21,4 +21,6 @@ const useLoginModal = create<LoginModalStore>((set) => ({
 
 
 
-export default useLoginModal;
+export default useAddPropertyModal;
+
+

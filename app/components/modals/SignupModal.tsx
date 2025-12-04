@@ -1,14 +1,16 @@
 'use client'
 
+
+
+
 import Modal from "./Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useSignupModal from "@/app/hooks/useSignupModal";
-import CustomButton from "../forms/CustomButton";
-import { handleLogin } from "@/app/lib/action";
+import CustomBtn from "../forms/CustomButton";
 import apiService from "@/app/services/apiService";
-
-
+import { handleLogin } from "@/app/lib/action";
+import { stringify } from "querystring";
 
 
 
@@ -17,6 +19,9 @@ const SignUpModal = () => {
 
 
 
+
+    //
+    // Variables
 
 
 
@@ -35,6 +40,9 @@ const SignUpModal = () => {
 
 
 
+    //
+    // Submit functionality
+
 
 
 
@@ -48,13 +56,7 @@ const SignUpModal = () => {
 
 
 
-        const formDataObj = new FormData();
-        formDataObj.append('email', email);
-        formDataObj.append('password1', password1);
-        formDataObj.append('password2', password2);
-
-        const response = await apiService.post('/api/auth/register/', formDataObj);
-
+        const response = await apiService.postWithoutToken('/api/auth/register/', JSON.stringify(formData));
 
 
 
@@ -62,7 +64,6 @@ const SignUpModal = () => {
         if (response.access) {
             handleLogin(response.user.pk, response.access, response.refresh);
             signupModal.close();
-
 
 
 
@@ -79,9 +80,6 @@ const SignUpModal = () => {
             setErrors(tmpErrors);
         }
     }
-
-
-
 
 
 
@@ -111,7 +109,6 @@ const SignUpModal = () => {
 
 
 
-
                 {errors.map((error, index) => {
                     return (
                         <div
@@ -126,13 +123,12 @@ const SignUpModal = () => {
 
 
 
-                <CustomButton
+                <CustomBtn
                     label="Submit"
                     onClick={submitSignup}
                 />
             </form>
         </>
-
     )
 
 
